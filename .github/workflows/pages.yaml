@@ -21,7 +21,7 @@ jobs:
         run: |
           curl -sSL https://install.python-poetry.org | python -
           poetry install
-          poetry add sphinx
+          poetry add "sphinx>=7,<9"
           poetry add sphinx-rtd-theme
           poetry add sphinx-autodoc-typehints
           poetry add myst-parser
