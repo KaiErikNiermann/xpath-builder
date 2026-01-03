@@ -23,7 +23,7 @@ jobs:
           poetry install
           poetry add "sphinx>=7,<9"
           poetry add sphinx-rtd-theme
-          poetry add sphinx-autodoc-typehints
+          poetry add "sphinx-autodoc-typehints<3.0"
           poetry add myst-parser
 
       - name: Build Sphinx Documentation
