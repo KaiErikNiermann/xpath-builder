@@ -1,14 +1,33 @@
 [project]
 name = "xpath-builder"
 version = "0.1.0"
-description = ""
+description = "A fluent, type-safe Python DSL for building XPath 2.0 expressions"
 authors = [
     {name = "Kai Erik Niermann"}
 ]
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.13"
+keywords = ["xpath", "xml", "html", "dsl", "builder", "scraping", "web-scraping"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Text Processing :: Markup :: XML",
+    "Topic :: Text Processing :: Markup :: HTML",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
 dependencies = [
 ]
+
+[project.urls]
+Homepage = "https://github.com/KaiErikNiermann/xpath-builder"
+Documentation = "https://kaierikniermann.github.io/xpath-builder/"
+Repository = "https://github.com/KaiErikNiermann/xpath-builder"
+Issues = "https://github.com/KaiErikNiermann/xpath-builder/issues"
 
 [project.optional-dependencies]
 docs = ["sphinx-rtd-theme"]
