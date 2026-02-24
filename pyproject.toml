@@ -1,6 +1,6 @@
 [project]
 name = "xpath-builder"
-version = "0.1.0"
+version = "0.1.1"
 description = "A fluent, type-safe Python DSL for building XPath 2.0 expressions"
 authors = [
     {name = "Kai Erik Niermann"}
