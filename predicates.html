@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Predicates &mdash; xpath-builder  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chaining" href="chaining.html" />
+    <link rel="prev" title="Core Concepts" href="core-concepts.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            xpath-builder
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core-concepts.html">Core Concepts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Predicates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#attribute-operations">Attribute Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#text-content">Text Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#string-matching">String Matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#numeric-comparisons">Numeric Comparisons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#case-insensitivity">Case Insensitivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#combining-predicates">Combining Predicates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chaining.html">Chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">xpath-builder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Predicates</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/predicates.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="predicates">
+<h1>Predicates<a class="headerlink" href="#predicates" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Pred</span></code> builds filter conditions for XPath predicates.</p>
+<section id="attribute-operations">
+<h2>Attribute Operations<a class="headerlink" href="#attribute-operations" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pred</span>
+
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;btn&quot;</span><span class="p">,</span> <span class="s2">&quot;button&quot;</span><span class="p">)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;vue-&quot;</span><span class="p">,</span> <span class="s2">&quot;react-&quot;</span><span class="p">)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;hidden&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">missing</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="text-content">
+<h2>Text Content<a class="headerlink" href="#text-content" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pred</span><span class="o">.</span><span class="n">text_contains</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">text_matches</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\d+$&quot;</span><span class="p">)</span>  <span class="c1"># regex match</span>
+</pre></div>
+</div>
+</section>
+<section id="string-matching">
+<h2>String Matching<a class="headerlink" href="#string-matching" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contains substring</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;nav&quot;</span><span class="p">,</span> <span class="s2">&quot;menu&quot;</span><span class="p">)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">all_of</span><span class="p">(</span><span class="s2">&quot;btn&quot;</span><span class="p">,</span> <span class="s2">&quot;primary&quot;</span><span class="p">)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">none_of</span><span class="p">(</span><span class="s2">&quot;hidden&quot;</span><span class="p">,</span> <span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+
+<span class="c1"># Token matching (space-separated, like CSS classes)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains_tokens</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;selected&quot;</span><span class="p">)</span>
+
+<span class="c1"># Starts/ends with</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;user-&quot;</span><span class="p">,</span> <span class="s2">&quot;admin-&quot;</span><span class="p">)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;.pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;.doc&quot;</span><span class="p">)</span>
+
+<span class="c1"># Regex matching</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;data-id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span><span class="p">()</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="numeric-comparisons">
+<h2>Numeric Comparisons<a class="headerlink" href="#numeric-comparisons" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;data-count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_num</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;data-count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_num</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_num</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="mf">99.99</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="case-insensitivity">
+<h2>Case Insensitivity<a class="headerlink" href="#case-insensitivity" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">case_insensitive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">as_str</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">&quot;submit&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="combining-predicates">
+<h2>Combining Predicates<a class="headerlink" href="#combining-predicates" title="Link to this heading"></a></h2>
+<p>Use Python operators to combine predicates:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AND: &amp;</span>
+<span class="n">visible</span> <span class="o">=</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;hidden&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">missing</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;display&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_str</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+
+<span class="c1"># OR: |</span>
+<span class="n">clickable</span> <span class="o">=</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;onclick&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+
+<span class="c1"># NOT: .neg()</span>
+<span class="n">not_disabled</span> <span class="o">=</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="o">.</span><span class="n">neg</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="core-concepts.html" class="btn btn-neutral float-left" title="Core Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="chaining.html" class="btn btn-neutral float-right" title="Chaining" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kai Erik Niermann.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

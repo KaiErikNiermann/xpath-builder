@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; xpath-builder  documentation</title>
+  <title>Chaining &mdash; xpath-builder  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -16,8 +17,10 @@
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Predicates" href="predicates.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,10 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="core-concepts.html">Core Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="predicates.html">Predicates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chaining.html">Chaining</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chaining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
@@ -70,8 +73,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Index</li>
+      <li class="breadcrumb-item active">Chaining</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chaining.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,17 +83,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
+  <section id="chaining">
+<h1>Chaining<a class="headerlink" href="#chaining" title="Link to this heading"></a></h1>
+<p>Build complex selectors by chaining methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Pred</span>
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+<span class="n">selector</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">E</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">any</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains_tokens</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;card&quot;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">E</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;https://&quot;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
 </div>
+<p>The chain reads naturally: <em>find any div with class “card”, then its child anchor links starting with “https://”, and take the first match</em>.</p>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="predicates.html" class="btn btn-neutral float-left" title="Predicates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

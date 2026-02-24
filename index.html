@@ -18,7 +18,8 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,43 +41,23 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">xpath-builder</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#quick-start">Quick Start</a></li>
-<li><a class="reference internal" href="#core-concepts">Core Concepts</a><ul>
-<li><a class="reference internal" href="#node">Node</a></li>
-<li><a class="reference internal" href="#path">Path</a></li>
-<li><a class="reference internal" href="#pred-predicate">Pred (Predicate)</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#attribute-operations">Attribute Operations</a><ul>
-<li><a class="reference internal" href="#string-matching">String Matching</a></li>
-<li><a class="reference internal" href="#numeric-comparisons">Numeric Comparisons</a></li>
-<li><a class="reference internal" href="#case-insensitivity">Case Insensitivity</a></li>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core-concepts.html">Core Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaining.html">Chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#combining-predicates">Combining Predicates</a></li>
-<li><a class="reference internal" href="#chaining">Chaining</a></li>
-<li><a class="reference internal" href="#positional-filtering">Positional Filtering</a></li>
-<li><a class="reference internal" href="#complete-examples">Complete Examples</a><ul>
-<li><a class="reference internal" href="#finding-ad-elements">Finding Ad Elements</a></li>
-<li><a class="reference internal" href="#finding-empty-svgs">Finding Empty SVGs</a></li>
-<li><a class="reference internal" href="#finding-framework-generated-ids">Finding Framework-Generated IDs</a></li>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#api-reference">API Reference</a><ul>
-<li><a class="reference internal" href="#shortcuts">Shortcuts</a></li>
-<li><a class="reference internal" href="#node-methods">Node Methods</a></li>
-<li><a class="reference internal" href="#path-methods">Path Methods</a></li>
-<li><a class="reference internal" href="#pred-class-methods">Pred Class Methods</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -104,247 +85,79 @@
   <section id="xpath-builder">
 <h1>xpath-builder<a class="headerlink" href="#xpath-builder" title="Link to this heading"></a></h1>
 <p>A fluent, type-safe Python DSL for building XPath 2.0 expressions.</p>
-<p><strong>xpath-builder</strong> helps you construct complex XPath queries programmatically without string concatenation, reducing errors and improving readability.</p>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>xpath-builder
-</pre></div>
-</div>
-</section>
-<section id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">STAR</span><span class="p">,</span> <span class="n">Pred</span>
+<p><strong>xpath-builder</strong> helps you construct complex XPath queries programmatically
+without string concatenation, reducing errors and improving readability.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Pred</span>
 
-<span class="c1"># Find all divs with class containing &quot;container&quot;</span>
 <span class="n">xpath</span> <span class="o">=</span> <span class="n">E</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
     <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;container&quot;</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">xpath</span><span class="o">.</span><span class="n">compile</span><span class="p">())</span>
-<span class="c1"># Output: //div[contains(@class, &#39;container&#39;)]</span>
+<span class="c1"># //div[contains(@class, &#39;container&#39;)]</span>
 </pre></div>
 </div>
-</section>
-<section id="core-concepts">
-<h2>Core Concepts<a class="headerlink" href="#core-concepts" title="Link to this heading"></a></h2>
-<section id="node">
-<h3>Node<a class="headerlink" href="#node" title="Link to this heading"></a></h3>
-<p>A <code class="docutils literal notranslate"><span class="pre">Node</span></code> represents an element or node test in XPath. Use the <code class="docutils literal notranslate"><span class="pre">E()</span></code> shortcut to create nodes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">STAR</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">,</span> <span class="n">COMMENT</span>
-
-<span class="n">E</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>      <span class="c1"># div element</span>
-<span class="n">E</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>        <span class="c1"># any element (or use STAR)</span>
-<span class="n">TEXT</span>          <span class="c1"># text() node</span>
-<span class="n">COMMENT</span>       <span class="c1"># comment() node</span>
-</pre></div>
-</div>
-</section>
-<section id="path">
-<h3>Path<a class="headerlink" href="#path" title="Link to this heading"></a></h3>
-<p>A <code class="docutils literal notranslate"><span class="pre">Path</span></code> represents a complete XPath expression. Nodes become paths via axis methods:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>      <span class="c1"># //div - anywhere in document</span>
-<span class="n">E</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">root</span><span class="p">()</span>     <span class="c1"># /div - at document root</span>
-<span class="n">E</span><span class="p">(</span><span class="s2">&quot;ul&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">E</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">))</span>   <span class="c1"># ul/li - direct child</span>
-<span class="n">E</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="n">E</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">))</span> <span class="c1"># div//span - any descendant</span>
-</pre></div>
-</div>
-</section>
-<section id="pred-predicate">
-<h3>Pred (Predicate)<a class="headerlink" href="#pred-predicate" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">Pred</span></code> builds filter conditions for XPath predicates:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pred</span>
-
-<span class="c1"># Attribute operations</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;btn&quot;</span><span class="p">,</span> <span class="s2">&quot;button&quot;</span><span class="p">)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;vue-&quot;</span><span class="p">,</span> <span class="s2">&quot;react-&quot;</span><span class="p">)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;hidden&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">missing</span><span class="p">()</span>
-
-<span class="c1"># Text content</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">text_contains</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">text_matches</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\d+$&quot;</span><span class="p">)</span>  <span class="c1"># regex match</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="attribute-operations">
-<h2>Attribute Operations<a class="headerlink" href="#attribute-operations" title="Link to this heading"></a></h2>
-<section id="string-matching">
-<h3>String Matching<a class="headerlink" href="#string-matching" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contains substring</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;nav&quot;</span><span class="p">,</span> <span class="s2">&quot;menu&quot;</span><span class="p">)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">all_of</span><span class="p">(</span><span class="s2">&quot;btn&quot;</span><span class="p">,</span> <span class="s2">&quot;primary&quot;</span><span class="p">)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">none_of</span><span class="p">(</span><span class="s2">&quot;hidden&quot;</span><span class="p">,</span> <span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
-
-<span class="c1"># Token matching (space-separated, like CSS classes)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains_tokens</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;selected&quot;</span><span class="p">)</span>
-
-<span class="c1"># Starts/ends with</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;user-&quot;</span><span class="p">,</span> <span class="s2">&quot;admin-&quot;</span><span class="p">)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;.pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;.doc&quot;</span><span class="p">)</span>
-
-<span class="c1"># Regex matching</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;data-id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span><span class="p">()</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="numeric-comparisons">
-<h3>Numeric Comparisons<a class="headerlink" href="#numeric-comparisons" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;data-count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_num</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;data-count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_num</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_num</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="mf">99.99</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="case-insensitivity">
-<h3>Case Insensitivity<a class="headerlink" href="#case-insensitivity" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Case-insensitive attribute matching</span>
-<span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">case_insensitive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">as_str</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">&quot;submit&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="combining-predicates">
-<h2>Combining Predicates<a class="headerlink" href="#combining-predicates" title="Link to this heading"></a></h2>
-<p>Use Python operators to combine predicates:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AND: &amp;</span>
-<span class="n">visible</span> <span class="o">=</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;hidden&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">missing</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;display&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_str</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
-
-<span class="c1"># OR: |</span>
-<span class="n">clickable</span> <span class="o">=</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;onclick&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
-
-<span class="c1"># NOT: .neg()</span>
-<span class="n">not_disabled</span> <span class="o">=</span> <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="o">.</span><span class="n">neg</span><span class="p">()</span>
-</pre></div>
-</div>
-</section>
-<section id="chaining">
-<h2>Chaining<a class="headerlink" href="#chaining" title="Link to this heading"></a></h2>
-<p>Build complex selectors by chaining methods:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Pred</span>
-
-<span class="n">selector</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">E</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">any</span><span class="p">()</span>
-    <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains_tokens</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;card&quot;</span><span class="p">))</span>
-    <span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">E</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">))</span>
-    <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span><span class="s2">&quot;https://&quot;</span><span class="p">))</span>
-    <span class="o">.</span><span class="n">first</span><span class="p">()</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="positional-filtering">
-<h2>Positional Filtering<a class="headerlink" href="#positional-filtering" title="Link to this heading"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>           <span class="c1"># //li[position() = 1]</span>
-<span class="n">E</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">nth</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>            <span class="c1"># //li[position() = 3]</span>
-<span class="n">E</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
-    <span class="n">position_ops</span><span class="p">()</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="complete-examples">
-<h2>Complete Examples<a class="headerlink" href="#complete-examples" title="Link to this heading"></a></h2>
-<section id="finding-ad-elements">
-<h3>Finding Ad Elements<a class="headerlink" href="#finding-ad-elements" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">STAR</span><span class="p">,</span> <span class="n">Pred</span>
-
-<span class="n">ad_selector</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">STAR</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-    <span class="o">.</span><span class="n">where</span><span class="p">(</span>
-        <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span>
-            <span class="s2">&quot;ads&quot;</span><span class="p">,</span> <span class="s2">&quot;ad&quot;</span><span class="p">,</span> <span class="s2">&quot;advert&quot;</span><span class="p">,</span> <span class="s2">&quot;sponsored&quot;</span><span class="p">,</span> <span class="s2">&quot;promo&quot;</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="finding-empty-svgs">
-<h3>Finding Empty SVGs<a class="headerlink" href="#finding-empty-svgs" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Pred</span>
-
-<span class="n">empty_svg</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">E</span><span class="p">(</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">any</span><span class="p">()</span>
-    <span class="o">.</span><span class="n">where</span><span class="p">(</span>
-        <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_str</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span> <span class="o">|</span>
-        <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;height&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_str</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span> <span class="o">|</span>
-        <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;aria-hidden&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_str</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="finding-framework-generated-ids">
-<h3>Finding Framework-Generated IDs<a class="headerlink" href="#finding-framework-generated-ids" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xpath_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">STAR</span><span class="p">,</span> <span class="n">Pred</span>
-
-<span class="n">framework_ids</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">STAR</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-    <span class="o">.</span><span class="n">where</span><span class="p">(</span>
-        <span class="n">Pred</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="o">.</span><span class="n">any_of</span><span class="p">(</span>
-            <span class="s2">&quot;vue-&quot;</span><span class="p">,</span> <span class="s2">&quot;react-&quot;</span><span class="p">,</span> <span class="s2">&quot;angular-&quot;</span><span class="p">,</span> <span class="s2">&quot;svelte-&quot;</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="api-reference">
-<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
-<section id="shortcuts">
-<h3>Shortcuts<a class="headerlink" href="#shortcuts" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">E(tag)</span></code> - Create a Node for the given element tag</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">STAR</span></code> - Matches any element (<code class="docutils literal notranslate"><span class="pre">*</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TEXT</span></code> - Matches text nodes (<code class="docutils literal notranslate"><span class="pre">text()</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">COMMENT</span></code> - Matches comment nodes (<code class="docutils literal notranslate"><span class="pre">comment()</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">NODE</span></code> - Matches any node (<code class="docutils literal notranslate"><span class="pre">node()</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ATTR(name)</span></code> - Matches an attribute (<code class="docutils literal notranslate"><span class="pre">&#64;name</span></code>)</p></li>
-</ul>
-</section>
-<section id="node-methods">
-<h3>Node Methods<a class="headerlink" href="#node-methods" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">.any()</span></code> → Path - Match anywhere (<code class="docutils literal notranslate"><span class="pre">//node</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.root()</span></code> → Path - Match at root (<code class="docutils literal notranslate"><span class="pre">/node</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.where(pred)</span></code> → Path - Add predicate filter</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.child(node)</span></code> → Path - Direct child axis</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.desc(node)</span></code> → Path - Descendant axis</p></li>
-</ul>
-</section>
-<section id="path-methods">
-<h3>Path Methods<a class="headerlink" href="#path-methods" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">.where(pred)</span></code> → Path - Add predicate filter</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.child(node)</span></code> → Path - Direct child axis</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.desc(node)</span></code> → Path - Descendant axis</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.first()</span></code> → Path - First match</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.nth(n)</span></code> → Path - Nth match</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.compile()</span></code> → str - Get the XPath string</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.validate()</span></code> - Validate XPath syntax (requires <code class="docutils literal notranslate"><span class="pre">elementpath</span></code> or <code class="docutils literal notranslate"><span class="pre">lxml</span></code>)</p></li>
-</ul>
-</section>
-<section id="pred-class-methods">
-<h3>Pred Class Methods<a class="headerlink" href="#pred-class-methods" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Pred.attr(name,</span> <span class="pre">case_insensitive=False)</span></code> - Attribute operations</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Pred.text_contains(needle)</span></code> - Text content contains</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Pred.text_matches(pattern)</span></code> - Text content regex match</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Pred.union(*preds)</span></code> - OR multiple predicates</p></li>
-</ul>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#import-the-essentials">1. Import the essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#build-an-expression">2. Build an expression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#compile-to-a-string">3. Compile to a string</a></li>
+</ul>
+</li>
+</ul>
 </div>
-</section>
-</section>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core-concepts.html">Core Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#node">Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#path">Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#positional-filtering">Positional Filtering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="predicates.html">Predicates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#attribute-operations">Attribute Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#text-content">Text Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#string-matching">String Matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#numeric-comparisons">Numeric Comparisons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#case-insensitivity">Case Insensitivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#combining-predicates">Combining Predicates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chaining.html">Chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#finding-ad-elements">Finding Ad Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#finding-empty-svgs">Finding Empty SVGs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#finding-framework-generated-ids">Finding Framework-Generated IDs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#shortcuts">Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#node-methods">Node Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#path-methods">Path Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pred-class-methods">Pred Class Methods</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
